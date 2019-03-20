@@ -38,7 +38,9 @@
 
 <br/>
 <%= link_to "CSV Template File", "/CSV File Template.csv" %>
-<br><br><br>
+<br>
+<br>
+<br>
 <%= form_tag import_faculties_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag "Upload Faculty Members" %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  root 'dashboard#index'
   resources :faculties do
     collection { post :import}
   end
