@@ -21,7 +21,41 @@
     <%= form.text_field :description %>
   </div>
 
+  <!-- I don't understand why this isn't showing up in the application -->
+  <div class="field">
+  <% form.fields_for :faculties do |faculties_form| %>
+    <p>
+      <%= faculties_form.label :last_name, "Faculty"%>
+      <%= faculties_form.text_field :last_name, :rows => 3 %>
+    </p>
+    <% end %>
+  </div>
+  <% for criteria in @course.criterium %>
+    <% fields_for "...", criteria do |criterium_form| %>
+      <p>
+      Task: <%= criterium_form.text_field :title %>
+      </p>
+      <% end %>
+    <% end %>
+
+  <% for faculty in @course.faculties %>
+    <% fields_for "...", faculty do |faculties_form| %>
+      <p>
+        Task: <%= faculties_form.text_field :title %>
+      </p>
+    <% end %>
+  <% end %>
+  <div class="field">
+    <%= form.label :criteria_id %>
+    <%= form.collection_select :criteria_id, Criterium.all,:id,:title %>
+    <br/>
+  </div>
+
+
+
+
   <div class="actions">
     <%= form.submit %>
+
   </div>
 <% end %>

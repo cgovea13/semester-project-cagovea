@@ -15,6 +15,8 @@ class CoursesController < ApplicationController
   # GET /courses/new
   def new
     @course = Course.new
+    3.times { @course.criterium.build}
+    3.times { @course.faculties.build}
   end
 
   # GET /courses/1/edit
@@ -61,6 +63,11 @@ class CoursesController < ApplicationController
     end
   end
 
+  def import
+    Course.import(params[:file])
+    redirect_to courses_path, notice: "Courses Added Successfully"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
@@ -69,6 +76,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:course_number, :description)
+      params.require(:course).permit(:course_number, :description, :criteria_id, :criterium_id)
     end
 end
